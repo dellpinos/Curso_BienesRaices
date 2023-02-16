@@ -1,5 +1,8 @@
-#archivos de Mac
+#Archivos de Mac
 .DS_store
 
 #Imagenes src
 src/img
+
+#Librerias NPM
+node_modules

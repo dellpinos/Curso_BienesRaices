@@ -13,14 +13,14 @@ const cache = require('gulp-cache');
 const clean = require('gulp-clean');
 const webp = require('gulp-webp');
 
-const paths = {
+const paths = {   /// Aca estan .los path! Es un objeto/array
     scss: 'src/scss/**/*.scss',
     js: 'src/js/**/*.js',
     imagenes: 'src/img/**/*'
 }
 
 function css() {
-    return src(paths.scss)
+    return src(paths.scss)   /// path es un modulo Node.Js para enrutar archivos
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
