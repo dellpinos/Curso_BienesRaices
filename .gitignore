@@ -4,5 +4,8 @@
 #Imagenes src
 src/img
 
+#Imagenes build
+build/img
+
 #Librerias NPM
 node_modules
