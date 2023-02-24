@@ -16,7 +16,9 @@ $blanco: #FFFFFF;
 $gris: #e1e1e1;
 $grisOscuro: #333333;
 
-$separacion: 5rem;
+$separacion: 5rem; // ya no funciona la division, cambio con las versiones
+// tengo que utilizar la funcion calc()
+// Ex: calc($separacion / 2)
 
 // Fuentes
 $delgada: 300;

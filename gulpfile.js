@@ -64,3 +64,4 @@ function watchArchivos() {
 exports.css = css;
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos); // como es default es lo mismo q escribir npm run gulp
+// en los scripts de package.json esta asignado el script "dev" con la llamada Node.js "gulp" osea "default"
