@@ -13,6 +13,7 @@
     &.inicio {
         background-position: center center;
         background-size: cover;
+        
 
         @include tablet {
             min-height: 70rem;
@@ -30,8 +31,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
-
 
     h1 {
         text-align: left;
