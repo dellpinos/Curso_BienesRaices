@@ -1,8 +1,8 @@
-.no-webp .inicio {
+.no-webp .inicio { // modernizr agrega la clase de .no-webp automaticamente
     background-image: url(../img/header.jpg);
 }
 
-.webp .inicio {
+.webp .inicio { // modernizr agrega la clase de .webp automaticamente
     background-image: url(../img/header.webp);
 }
 
@@ -11,12 +11,12 @@
     padding: 1rem 0 3rem 0;
 
     &.inicio {
-        background-position: center center;
+        background-position: center center; // para evitar que se repitan
         background-size: cover;
         
 
         @include tablet {
-            min-height: 70rem;
+            min-height: 70rem; // altura de la imagen
         }
 
         .contenido-header {
@@ -37,6 +37,6 @@
         color: $blanco;
         font-weight: $bold;
         line-height: 2;
-        max-width: 60rem;
+        max-width: 60rem; // para crear el salto de linea, si le doy un ancho determinado el resto del texto pasa a la siguiente linea
     }
 }
