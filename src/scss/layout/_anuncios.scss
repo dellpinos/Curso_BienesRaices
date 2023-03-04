@@ -15,16 +15,18 @@
     h3, p {
         margin: 0;
     }
-    .precio {
-        color: $verde;
-        font-weight: bold;
-        font-size: 3rem;
-    }
+    
+}
+.precio {
+    color: $verde;
+    font-weight: bold;
+    font-size: 3rem;
 }
 .iconos-caracteristicas {
     display: flex;
     list-style: none;
     padding: 0;
+    max-width: 40rem;
     li {
         display: flex;
         flex: 1; // los distribuye en una proporcion que cada uno recibe 1px del espacio disponible
