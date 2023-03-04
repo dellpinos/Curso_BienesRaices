@@ -1,0 +1,27 @@
+.testimonial {
+    background-color: $verde;
+    font-size: 2.4rem;
+    padding: 2rem;
+    color: $blanco;
+    border-radius: 2rem;
+    
+    blockquote {
+        padding-left: 5rem; // espacio para el vector
+        position: relative; // estoy posicionando el vector
+
+        &::before {
+            content: '';
+            background-image: url(../img/comilla.svg); //(agrego la imagen con un bg-img
+            background-repeat: no-repeat; // para evitar que se repita (default)
+            height: 8rem;
+            width: 6rem;
+            display: block; //no visualizo el vector hasta que le agrego un display
+            position: absolute; // de esta forma se superpone al blockquote, si el blockquote no fuece absolute este vector se posicionaria de forma absoluta en realcion a todo el documento
+            left: -2rem; // lo estoy posicionando relativo al blockquote, puedo probar estos cambios desde la dev tools del browser
+        }
+    }
+    p {
+        text-align: right;
+        color: $blanco;
+    }
+}
