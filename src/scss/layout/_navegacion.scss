@@ -1,6 +1,7 @@
 .barra {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding-top: 3rem;
     @include tablet {
         flex-direction: row;
@@ -9,6 +10,8 @@
 }
 
 .navegacion {
+
+    display: none;
 
     @include tablet {
         display: flex;
@@ -21,6 +24,9 @@
         font-size: 2.2rem;
         display: block; // ocupe todo el espacio disponible
         text-align: center; // centra el contenido
+        &:hover {
+            color: $grisOscuro;
+        }
 
         @include tablet {
             margin-right: 2rem;
@@ -31,4 +37,19 @@
             }
         }
     }
+}
+
+// Menu de hamburguesa
+
+.mobile-menu {
+    @include tablet {
+        display: none;
+    }
+    img {
+        width: 5rem;
+
+    }
+}
+.mostrar {
+    display: block;
 }
