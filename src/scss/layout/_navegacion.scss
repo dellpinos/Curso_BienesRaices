@@ -38,10 +38,11 @@
 .navegacion {
 
     // display: none;
+    height: 0; // para evitar el espacio en blanco cuando no es visible la navegacion
     visibility: hidden; //una propiedad que se puede animar
     opacity: 0; // muy similar a visibility hidden
-    transition: visibility .3s ease-in-out, opacity .5s linear;
-
+    transition: visibility .3s ease-in-out, opacity .5s linear, height .5s linear;
+    // agrego el height a la animacion
     @include tablet {
         display: flex;
         align-items: center;
@@ -83,6 +84,7 @@
 }
 
 .mostrar {
+    height: auto; // para añadir la altura que elimine previamente
     visibility: visible;
     opacity: 1;
 }
