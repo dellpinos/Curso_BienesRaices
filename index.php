@@ -1,7 +1,7 @@
-<?php 
-$inicio = true;
-include 'includes/templates/header.php';
-
+<?php
+    require 'includes/funciones.php'; // incluye las funciones en este archivo
+    $inicio = true;
+    incluirTemplate('header');
 ?>
 
 

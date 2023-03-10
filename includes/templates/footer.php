@@ -9,12 +9,13 @@
         </div>
 
         
-        <p class="copyright">Todos los derechos Reservados 2023 &copy; <?php $fecha = date('d-m-Y');
+        <p class="copyright">Todos los derechos Reservados <?php $fecha = date('Y');
         echo $fecha;
-        ?></p>
+        ?> &copy; </p>
 
     </footer>
     <script src="build/js/bundle.min.js"></script>
 </body>
 
 </html>
+
