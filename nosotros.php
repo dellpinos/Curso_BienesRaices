@@ -1,6 +1,6 @@
-<?php 
-
-include 'includes/templates/header.php';
+<?php
+    require 'includes/funciones.php'; // incluye las funciones en este archivo, no requiero volver a importarlas aunq cierre las llaves PHP
+    incluirTemplate('header');
 ?>
 
     <main class="contenedor seccion">
@@ -50,5 +50,5 @@ include 'includes/templates/header.php';
     </section>
 
     <?php 
-include 'includes/templates/footer.php';
+incluirTemplate('footer');
 ?>

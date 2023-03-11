@@ -1,7 +1,7 @@
 <?php
+declare(strict_types = 1);
     require 'includes/funciones.php'; // incluye las funciones en este archivo
-    $inicio = true;
-    incluirTemplate('header');
+    incluirTemplate('header', $inicio = true);
 ?>
 
 
@@ -189,6 +189,6 @@
         </section>
     </div>
 
-<?php 
-include 'includes/templates/footer.php';
+    <?php 
+incluirTemplate('footer');
 ?>
