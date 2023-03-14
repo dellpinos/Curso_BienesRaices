@@ -5,6 +5,11 @@ require '../../includes/config/database.php';
 
 $db = conectarDB();
 
+// Consultar DB para obtener vendedores
+
+$consulta = "SELECT * FROM vendedores";
+$resultado = mysqli_query($db, $consulta);
+
 // Array con mensajes de error
 $errores = [];
 
@@ -15,6 +20,7 @@ $habitaciones = '';
 $wc = '';
 $estacionamiento = '';
 $vendedores_id = '';
+$creado = date('Y/m/d');
 
 
 // Ejecutar el código despues de que el usuario envie el formulario
@@ -51,20 +57,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Elige un vendedor";
     }
 
-    // echo "<pre>";
-    //     var_dump($errores);
-    // echo "</pre>";
-
     // Revisar que el array de Errores este vacio
 
     if (empty($errores)) {
 
         // Insertar en la base de datos
-        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, vendedores_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$vendedores_id')";
+        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
 
         $resultado = mysqli_query($db, $query);
 
         if ($resultado) {
+            // Redireccionar al usuario
+
+            header('location: /admin');
             echo 'Insertado Correctamente';
         }
     }
@@ -77,7 +82,6 @@ incluirTemplate('header');
 
 <main class="contenedor seccion">
     <h1>Crear</h1>
-
 
     <a href="/admin" class="boton boton-verde">Volver</a>
     <?php foreach ($errores as $error) : ?>
@@ -121,14 +125,16 @@ incluirTemplate('header');
             <legend>Vendedor</legend>
             <select name="vendedor">
                 <option value="">-- Seleccione --</option>
-                <option value="1">Martin</option>
-                <option value="3">Sofia</option>
+                <?php while($row = mysqli_fetch_assoc($resultado) ) : ?>
+                    <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id'] ?>"> <?php echo $row['nombre'] . " " . $row['apellido']; ?></option>
+
+                <?php endwhile ?>
+
             </select>
         </fieldset>
 
         <input type="submit" value="Crear Propiedad" class="boton boton-verde">
     </form>
 </main>
-
 
 <?php incluirTemplate('footer'); ?>
