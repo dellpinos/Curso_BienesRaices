@@ -27,12 +27,12 @@ $creado = date('Y/m/d');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    // echo "<pre>";
-    //     var_dump($_POST);
-    // echo "</pre>";
-    // echo "<pre>";
-    //     var_dump($_FILES);
-    // echo "</pre>";
+    echo "<pre>";
+        var_dump($_POST);
+    echo "</pre>";
+    echo "<pre>";
+        var_dump($_FILES);
+    echo "</pre>";
 
 
     $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
@@ -73,20 +73,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errores[] = "Debes añadir una imagen";
     }
 
-    // Validar por tamaño (100Kb maximo)
+    // Validar por tamaño (1Mb maximo)
 
-    $medida = 1000 * 100;
+    $medida = 1000 * 1000;
 
     if($imagen['size'] > $medida) {
         $errores[] = "La imagen es demasiado grande";
     }
 
-    // Revisar que el array de Errores este vacio
+    // Revisar que el array de errores este vacio
 
     if (empty($errores)) {
 
+        /** SUBIDA DE ARCHIVOS */
+
+        //Crear una carpeta
+        $carpetaImagenes = '../../imagenes/';
+
+        if(!is_dir($carpetaImagenes)) {
+            mkdir($carpetaImagenes);
+        }
+
+        // Generar un nombre unico
+
+        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+
+        // Subir imagen
+
+        move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
+        
+
         // Insertar en la base de datos
-        $query = "INSERT INTO propiedades (titulo, precio, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
+        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
 
         $resultado = mysqli_query($db, $query);
 
