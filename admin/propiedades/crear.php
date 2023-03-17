@@ -27,14 +27,10 @@ $creado = date('Y/m/d');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    echo "<pre>";
-        var_dump($_POST);
-    echo "</pre>";
-    echo "<pre>";
-        var_dump($_FILES);
-    echo "</pre>";
+    // Asignar files hacia una variable
+    $imagen = $_FILES['imagen'];
 
-
+    // Sanitizacion
     $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
     $precio = mysqli_real_escape_string($db, $_POST['precio']);
     $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
@@ -43,11 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
     $vendedores_id = mysqli_real_escape_string($db, $_POST['vendedor']);
 
-    // Asignar files hacia una variable
-    $imagen = $_FILES['imagen'];
-
-
-
+    
+    // Validaciones
     if (!$titulo) {
         $errores[] = "Debes añadir un titulo"; //añade este valor al final del arreglo
     }
@@ -75,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar por tamaño (1Mb maximo)
 
-    $medida = 1000 * 1000;
+    $medida = 1000 * 1000; // Mb a bytes
 
     if($imagen['size'] > $medida) {
         $errores[] = "La imagen es demasiado grande";
@@ -88,10 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /** SUBIDA DE ARCHIVOS */
 
         //Crear una carpeta
-        $carpetaImagenes = '../../imagenes/';
+        $carpetaImagenes = '../../imagenes/'; //url donde almacenar las imagenes
 
-        if(!is_dir($carpetaImagenes)) {
-            mkdir($carpetaImagenes);
+        if(!is_dir($carpetaImagenes)) {  // controlo si la carpeta esta creada
+            mkdir($carpetaImagenes); // creo la carpeta
         }
 
         // Generar un nombre unico
@@ -104,13 +97,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
         
 
-        // Insertar en la base de datos
+        /**  Insertar en la base de datos */
+        
+        // Sentencia SQL
         $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
 
+        // Consulta
         $resultado = mysqli_query($db, $query);
 
+        // Redireccionar al usuario
         if ($resultado) {
-            // Redireccionar al usuario
+            
 
             header('location: /admin?resultado=1');
             echo 'Insertado Correctamente';
@@ -122,12 +119,12 @@ require '../../includes/funciones.php'; // incluye las funciones en este archivo
 incluirTemplate('header');
 ?>
 
-
+<!-- Inicio del documento -->
 <main class="contenedor seccion">
     <h1>Crear</h1>
 
     <a href="/admin" class="boton boton-verde">Volver</a>
-    <?php foreach ($errores as $error) : ?>
+    <?php foreach ($errores as $error) : ?> <!-- busco errores en el array para mostrarlos -->
         <div class="alerta error">
             <?php echo $error; ?>
         </div>
@@ -139,7 +136,7 @@ incluirTemplate('header');
             <legend>Informacion General</legend>
 
             <label for="titulo">Titulo:</label>
-            <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad" value="<?php echo $titulo; ?>">
+            <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad" value="<?php echo $titulo; ?>"> <!-- php para no tener q escribir dos veces en caso de error -->
 
             <label for="precio">Precio:</label>
             <input type="number" id="precio" name="precio" placeholder="Precio Propiedad" value="<?php echo $precio; ?>">
@@ -167,8 +164,8 @@ incluirTemplate('header');
         <fieldset>
             <legend>Vendedor</legend>
             <select name="vendedor">
-                <option value="">-- Seleccione --</option>
-                <?php while($row = mysqli_fetch_assoc($resultado) ) : ?>
+                <option value="">-- Seleccione --</option> 
+                <?php while($row = mysqli_fetch_assoc($resultado) ) : ?> <!-- cargo un array con la consulta a la DB, dentro de while para que lo haga una vez por registro -->
                     <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id'] ?>"> <?php echo $row['nombre'] . " " . $row['apellido']; ?></option>
 
                 <?php endwhile ?>
@@ -177,7 +174,7 @@ incluirTemplate('header');
         </fieldset>
 
         <input type="submit" value="Crear Propiedad" class="boton boton-verde">
-    </form>
+    </form> <!-- envio formulario al servidor -->
 </main>
 
 <?php incluirTemplate('footer'); ?>
