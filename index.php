@@ -29,16 +29,17 @@ incluirTemplate('header', $inicio = true);
 </main>
 
 <section class="seccion contenedor">
-    <h2>Casas y Dptos en Venta</h2>
+    <h2 class="m-top-bottom" >Casas y Departamentos en Venta</h2>
 
     <?php  
+        $limite = 3; // cantidad de cards en pantalla
         include 'includes/templates/anuncios.php'
     ?>
 
 
 
     <div class="alinear-derecha">
-        <a href="anuncio.php" class="boton-verde">Ver Todas</a>
+        <a href="anuncios.php" class="boton-verde">Ver Todas</a>
     </div>
 </section>
 <section class="imagen-contacto">
