@@ -37,14 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') { // este código se ejecuta una vez 
 
             if($auth) {
                 session_start();
-
+                // Usuario autenticado
                 // llenar el array de la session
                 $_SESSION['usuario'] = $usuario['email'];
                 $_SESSION['login'] = true;
-                echo "<pre>";
-                    var_dump($_SESSION);
-                echo "</pre>";
-                // Usuario autenticado
+                header('Location: /admin');
+                
             } else {
                 $errores[] = "El password es incorrecto";
             }

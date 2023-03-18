@@ -1,4 +1,11 @@
 <?php
+
+// Inicio sesion
+require '../../includes/funciones.php'; // incluye las funciones en este archivo
+$auth = usuarioAutenticado();
+if(!$auth) {
+    header ('Location: /');
+}
 // Base de datos
 
 require '../../includes/config/database.php';
@@ -115,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 };
 
-require '../../includes/funciones.php'; // incluye las funciones en este archivo
+
 incluirTemplate('header');
 ?>
 

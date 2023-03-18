@@ -1,16 +1,12 @@
 <?php
 // Inicio sesion
-session_start();
-
-echo "<pre>";
-    var_dump($_SESSION);
-echo "</pre>";
-
-$auth = $_SESSION['login'];
-
+require '../includes/funciones.php'; // incluye las funciones en este archivo
+$auth = usuarioAutenticado();
 if(!$auth) {
     header ('Location: /');
 }
+
+
 // Importar conexion
 
 require '../includes/config/database.php';
@@ -44,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Eliminar el registro
         $query = "DELETE FROM propiedades WHERE id = {$id}";
-
         $resultado = mysqli_query($db, $query);
 
         if($resultado) {
@@ -57,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 //Incluye template
-require '../includes/funciones.php'; // incluye las funciones en este archivo
+
 incluirTemplate('header');
 ?>
 
