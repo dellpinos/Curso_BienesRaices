@@ -1,6 +1,16 @@
 <?php
+// Inicio sesion
+session_start();
 
+echo "<pre>";
+    var_dump($_SESSION);
+echo "</pre>";
 
+$auth = $_SESSION['login'];
+
+if(!$auth) {
+    header ('Location: /');
+}
 // Importar conexion
 
 require '../includes/config/database.php';
@@ -42,6 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+
+
 
 //Incluye template
 require '../includes/funciones.php'; // incluye las funciones en este archivo

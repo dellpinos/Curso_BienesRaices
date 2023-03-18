@@ -11,13 +11,20 @@ if (!$id) {
 // Base de datos
 
 require 'includes/config/database.php';
-
 $db = conectarDB();
 
 // Consultar datos de la propiedad
 
 $consulta = "SELECT * FROM propiedades WHERE id = {$id}";
 $resultado = mysqli_query($db, $consulta);
+
+// Validacion y redireccion al index si el id es invalido
+
+if(!$resultado->num_rows) {
+    header('Location: /'); 
+}
+
+
 $propiedad = mysqli_fetch_assoc($resultado);
 
 
@@ -58,5 +65,7 @@ incluirTemplate('header');
 </main>
 
 <?php
+
+mysqli_close($db);
 incluirTemplate('footer');
 ?>
