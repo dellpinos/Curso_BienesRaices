@@ -1,8 +1,14 @@
 <?php
-session_start();
-echo "<pre>";
-    var_dump($_SESSION);
-echo "</pre>";
+
+if(!isset($_SESSION)) {
+    session_start();
+}
+
+$auth = $_SESSION['login'] ?? false; // le da un valor por defaulr (evitar variable no definida)
+
+// echo "<pre>";
+//     var_dump($auth);
+// echo "</pre>";
 ?>
 
 <!DOCTYPE html>
@@ -35,6 +41,9 @@ echo "</pre>";
                         <a href="anuncios.php">Anuncios</a>
                         <a href="blog.php">Blog</a>
                         <a href="contacto.php">Contacto</a>
+                        <?php if($auth) : ?>
+                            <a href="cerrar-sesion.php">Cerrar Sesión</a>
+                        <?php endif; ?>
                     </nav>
                 </div>
             </div> <!-- cierre de la barra-->
