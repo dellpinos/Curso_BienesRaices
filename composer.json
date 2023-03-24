@@ -1,0 +1,17 @@
+{
+    "name": "martindelpino/bienesraices_inicio",
+    "description": "Proyecto BR POO",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Martin del Pino",
+            "email": "dellpinos7@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "App\\" : "./classes"
+        }
+    }
+}

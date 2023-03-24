@@ -1,3 +1,10 @@
 <?php 
-define('TEMPLATES_URL', __DIR__ . '/templates');// definiendo una url
-define('FUNCIONES_URL', __DIR__ . 'funciones.php');// misma carpeta
+
+require 'funciones.php';
+require 'config/database.php';
+require __DIR__ . '/../vendor/autoload.php';
+
+
+use App\Propiedad;
+
+$propiedad = new Propiedad;

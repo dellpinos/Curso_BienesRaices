@@ -1,6 +1,5 @@
 <?php 
 // Importar la conexion a la DB
-require __DIR__ . '/../config/database.php'; // tener en cuenta en la ruta que este archivo sera llamado desde la raiz (index.php)
 $db = conectarDB();
 
 // Consultar DB

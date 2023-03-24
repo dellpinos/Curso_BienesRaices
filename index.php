@@ -1,7 +1,7 @@
 <?php
 
 declare(strict_types=1);
-require 'includes/funciones.php'; // incluye las funciones en este archivo
+require 'includes/app.php'; // incluye las funciones en este archivo
 incluirTemplate('header', $inicio = true);
 ?>
 

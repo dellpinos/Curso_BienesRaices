@@ -1,5 +1,5 @@
 <?php
-    require 'includes/funciones.php'; // incluye las funciones en este archivo, no requiero volver a importarlas aunq cierre las llaves PHP
+    require 'includes/app.php'; 
     incluirTemplate('header');
 ?>
 
