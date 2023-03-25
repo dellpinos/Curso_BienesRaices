@@ -10,13 +10,20 @@ function incluirTemplate(string $nombre, bool $inicio = false) {
 }
 
 // Inicio sesion
-function usuarioAutenticado() : bool {  
+function usuarioAutenticado() : void {  
 session_start();
-$auth = $_SESSION['login']; // agrego isset por warning de variable no definida en firefox
-if($auth) {
-    return true; //chequear esto  <<<<<<<
-    
-}
-return false;
+
+if(!$_SESSION['login']) {
+    header ('Location: /');
 }
 
+}
+
+function debuguear($parametro){
+
+    echo "<pre>";
+        var_dump($parametro);
+    echo "</pre>";
+
+    exit;
+}

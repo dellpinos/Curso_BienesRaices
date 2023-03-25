@@ -1,15 +1,13 @@
 <?php
 
-// Inicio sesion
-require '../../includes/funciones.php'; // incluye las funciones en este archivo
-$auth = usuarioAutenticado();
-if(!$auth) {
-    header ('Location: /');
-}
+require '../../includes/app.php';
+
+use App\Propiedad;
+
+
+usuarioAutenticado();
+
 // Base de datos
-
-require '../../includes/config/database.php';
-
 $db = conectarDB();
 
 // Consultar DB para obtener vendedores
@@ -33,6 +31,14 @@ $creado = date('Y/m/d');
 // Ejecutar el código despues de que el usuario envie el formulario
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $propiedad = new Propiedad($_POST);
+    $propiedad->guardar();
+
+    debuguear($propiedad);
+
+
+    
 
     // Asignar files hacia una variable
     $imagen = $_FILES['imagen'];
@@ -98,7 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
-
         // Subir imagen
 
         move_uploaded_file($imagen['tmp_name'], $carpetaImagenes . $nombreImagen);
@@ -107,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         /**  Insertar en la base de datos */
         
         // Sentencia SQL
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$titulo', '$precio', '$nombreImagen', '$descripcion', '$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedores_id')";
+        
 
         // Consulta
         $resultado = mysqli_query($db, $query);
@@ -170,7 +175,7 @@ incluirTemplate('header');
 
         <fieldset>
             <legend>Vendedor</legend>
-            <select name="vendedor">
+            <select name="vendedores_id">
                 <option value="">-- Seleccione --</option> 
                 <?php while($row = mysqli_fetch_assoc($resultado) ) : ?> <!-- cargo un array con la consulta a la DB, dentro de while para que lo haga una vez por registro -->
                     <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id'] ?>"> <?php echo $row['nombre'] . " " . $row['apellido']; ?></option>
