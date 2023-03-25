@@ -45,15 +45,19 @@ class Propiedad { // sintaxis anterior
         
         // Sanitizar entrada de datos
         $atributos = $this->sanitizarDatos();
-        debuguear($atributos);
 
         //Insetar en la DB
 
-        $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedores_id')";
+        // $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedores_id) VALUES ('$this->titulo', '$this->precio', '$this->imagen', '$this->descripcion', '$this->habitaciones', '$this->wc', '$this->estacionamiento', '$this->creado', '$this->vendedores_id')";
+
+        $query = "INSERT INTO propiedades (";
+        $query .= join(', ', array_keys($atributos));  // acumuladores de strings en la misma variable
+        $query .= " ) VALUES (' ";
+        $query .= join("', '", array_values($atributos));
+        $query .= " ') " ;
 
         $resultado = self::$db->query($query);
 
-        debuguear($resultado);
         
     }
     // Identificar y unir los atributos de la DB

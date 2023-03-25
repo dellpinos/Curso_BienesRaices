@@ -1,16 +1,10 @@
 <?php
 // Inicio sesion
-require '../includes/funciones.php'; // incluye las funciones en este archivo
-$auth = usuarioAutenticado();
-if(!$auth) {
-    header ('Location: /');
-}
+
+require '../includes/app.php';
+usuarioAutenticado();
 
 
-// Importar conexion
-
-require '../includes/config/database.php';
-$db = conectarDB();
 
 //Escribir query
 $query = "SELECT * FROM propiedades";

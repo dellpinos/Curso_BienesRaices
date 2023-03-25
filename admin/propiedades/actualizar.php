@@ -1,10 +1,7 @@
 <?php
-require '../../includes/funciones.php'; // incluye las funciones en este archivo
-$auth = usuarioAutenticado();
 
-if(!$auth) {
-    header ('Location: /');
-}
+require '../../includes/app.php';
+usuarioAutenticado();
 
 $id = $_GET['id'];
 $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -14,11 +11,7 @@ if (!$id) {
     header('Location: /admin');
 }
 
-// Base de datos
 
-require '../../includes/config/database.php';
-
-$db = conectarDB();
 
 // Consultar datos de la propiedad
 
