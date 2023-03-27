@@ -121,5 +121,38 @@ class Propiedad { // sintaxis anterior
 
     return self::$errores;
     }
-    
+
+    // Listar todas las propiedades
+
+    public static function all() {
+
+        $query = "SELECT * FROM propiedades";
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+    public static function consultarSQL($query) {
+        // consultar la base de datos
+        $resultado = self::$db->query($query);
+        // iterar resultados
+        $array = [];
+        while($registro = $resultado->fetch_assoc()) {
+            $array[] = self::crearObjeto($registro);
+        }
+        // liberar la memoria
+        $resultado->free();
+        //retornar los resultados
+        return $array;
+    }
+    protected static function crearObjeto($registro) {
+        $objeto = new self;
+        foreach($registro as $key => $value) { // por cada elemento del array leo su llave
+            if(property_exists($objeto, $key)) { //si contiene la propiedad que corresponde a $key
+                $objeto->$key = $value;
+            }
+        }
+
+        return $objeto;
+    }
 }
