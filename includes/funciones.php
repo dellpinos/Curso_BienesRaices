@@ -1,15 +1,11 @@
 <?php
 
+//** Constantes */
 define('TEMPLATES_URL', __DIR__ . '/templates');// definiendo una url
 define('FUNCIONES_URL', __DIR__ . 'funciones.php');// misma carpeta
 define('CARPETA_IMAGENES', __DIR__ . '/../imagenes/');
 
-
-
-
-
-
-
+//** Funciones */
 function incluirTemplate(string $nombre, bool $inicio = false) {
     include TEMPLATES_URL . "/{$nombre}.php";
 }
@@ -24,6 +20,7 @@ if(!$_SESSION['login']) {
 
 }
 
+// dev
 function debuguear($parametro){
 
     echo "<pre>";
@@ -31,4 +28,10 @@ function debuguear($parametro){
     echo "</pre>";
 
     exit;
+}
+
+// Escapar / Sanitizar el HTML
+function s($html) : string {
+    $s = htmlspecialchars($html);
+    return $s;
 }

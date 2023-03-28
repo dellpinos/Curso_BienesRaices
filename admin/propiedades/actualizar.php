@@ -1,5 +1,7 @@
 <?php
 
+use App\Propiedad;
+
 require '../../includes/app.php';
 usuarioAutenticado();
 
@@ -12,12 +14,9 @@ if (!$id) {
 }
 
 
+$propiedad = Propiedad::find($id);
 
-// Consultar datos de la propiedad
 
-$consulta = "SELECT * FROM propiedades WHERE id = {$id}";
-$resultado = mysqli_query($db, $consulta);
-$propiedad = mysqli_fetch_assoc($resultado);
 
 
 // Consultar DB para obtener vendedores
@@ -28,15 +27,6 @@ $resultado = mysqli_query($db, $consulta);
 // Array con mensajes de error
 $errores = [];
 
-$titulo = $propiedad['titulo'];
-$precio = $propiedad['precio'];  // inicia como string pero cambia a numero cuando se le ingresa un valor
-$descripcion = $propiedad['descripcion'];
-$habitaciones = $propiedad['habitaciones'];
-$wc = $propiedad['wc'];
-$estacionamiento = $propiedad['estacionamiento'];
-$vendedores_id = $propiedad['vendedores_id'];
-$creado = date('Y/m/d');
-$imagenPropiedad = $propiedad['imagen'];
 
 
 // Ejecutar el código despues de que el usuario envie el formulario
@@ -156,49 +146,7 @@ incluirTemplate('header');
     <?php endforeach; ?>
 
     <form class="formulario" method="POST" enctype="multipart/form-data">
-        <fieldset>
-            <legend>Informacion General</legend>
-
-            <label for="titulo">Titulo:</label>
-            <input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad" value="<?php echo $titulo; ?>"> <!-- php para no tener q escribir dos veces en caso de error -->
-
-            <label for="precio">Precio:</label>
-            <input type="number" id="precio" name="precio" placeholder="Precio Propiedad" value="<?php echo $precio; ?>">
-
-            <label>Imagen Actual:</label>
-            <img src="/imagenes/<?php echo $imagenPropiedad; ?>" class="imagen-pequeña" alt="Imagen de la propiedad">
-
-            <label for="imagen">Reemplazar Imagen:</label>
-            <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen">
-
-            <label for="descripcion">Descripción:</label>
-            <textarea id="descripcion" name="descripcion" placeholder="Escriba una descripcion"><?php echo $descripcion; ?></textarea>
-        </fieldset>
-
-        <fieldset>
-            <legend>Información de la Popiedad</legend>
-
-            <label for="habitaciones">Habitaciones: </label>
-            <input type="number" id="habitaciones" name="habitaciones" placeholder="Ej: 3" min="1" max="9" value="<?php echo $habitaciones; ?>">
-
-            <label for="wc">Baños: </label>
-            <input type="number" id="wc" name="wc" placeholder="Ej: 2" min="1" max="6" value="<?php echo $wc; ?>">
-
-            <label for="estacionamiento">Estacionamiento: </label>
-            <input type="number" id="estacionamiento" name="estacionamiento" placeholder="Ej: 2" min="1" max="4" value="<?php echo $estacionamiento; ?>">
-        </fieldset>
-
-        <fieldset>
-            <legend>Vendedor</legend>
-            <select name="vendedor">
-                <option value="">-- Seleccione --</option>
-                <?php while ($row = mysqli_fetch_assoc($resultado)) : ?> <!-- cargo un array con la consulta a la DB, dentro de while para que lo haga una vez por registro -->
-                    <option <?php echo $vendedores_id === $row['id'] ? 'selected' : ''; ?> value="<?php echo $row['id'] ?>"> <?php echo $row['nombre'] . " " . $row['apellido']; ?></option>
-
-                <?php endwhile ?>
-
-            </select>
-        </fieldset>
+        <?php include '../../includes/templates/formulario_propiedades.php'; ?> 
 
         <input type="submit" value="Actualizar Propiedad" class="boton boton-verde">
     </form> <!-- envio formulario al servidor -->

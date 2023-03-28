@@ -9,14 +9,6 @@ use App\Propiedad;
 // Implementar un metodo para obtener todas las Casas utilizando Active Record
 $propiedades = Propiedad::all();
 
-
-
-// //Escribir query
-// $query = "SELECT * FROM propiedades";
-// //Consultar DB
-// $resultadoConsulta = mysqli_query($db, $query); // cargo datos de la DB
-
-
 // Muestra mensaje condicional
 $resultado = $_GET['resultado'] ?? null; // cargo datos de la URL
 

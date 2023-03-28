@@ -33,7 +33,7 @@ class Propiedad { // sintaxis anterior
         $this->wc = $args['wc'] ?? '';
         $this->estacionamiento = $args['estacionamiento'] ?? '';
         $this->creado = date('Y/m/d');
-        $this->vendedores_id = $args['vendedores_id'] ?? '';
+        $this->vendedores_id = $args['vendedores_id'] ?? 1;
     }
 
     public static function setDB($database){
@@ -122,7 +122,7 @@ class Propiedad { // sintaxis anterior
     return self::$errores;
     }
 
-    // Listar todas las propiedades
+    // Listar todos los registros
 
     public static function all() {
 
@@ -132,6 +132,17 @@ class Propiedad { // sintaxis anterior
 
         return $resultado;
     }
+
+    // Busca un registro por su id
+    public static function find($id){
+        $query = "SELECT * FROM propiedades WHERE id = {$id}";
+
+        $resultado = self::consultarSQL($query);
+
+        return array_shift($resultado);
+    }
+
+    
     public static function consultarSQL($query) {
         // consultar la base de datos
         $resultado = self::$db->query($query);
