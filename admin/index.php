@@ -10,6 +10,7 @@ use App\Propiedad;
 $propiedades = Propiedad::all();
 
 
+
 // //Escribir query
 // $query = "SELECT * FROM propiedades";
 // //Consultar DB
@@ -80,23 +81,24 @@ incluirTemplate('header');
         <!-- Mostrar resultados de la DB -->
 
         <tbody>
-            <?php while ($propiedad = mysqli_fetch_assoc($resultadoConsulta)) : ?>
+            <?php foreach($propiedades as $propiedad) :  ?>
                 <tr>
-                    <th><?php echo $propiedad['id']; ?></th> <!-- Proceso e imprimo -->
-                    <th><?php echo $propiedad['titulo']; ?></th>
-                    <th> <img src="/imagenes/<?php echo $propiedad['imagen']; ?>" class="imagen-tabla"> </th>
-                    <th>$ <?php echo $propiedad['precio']; ?></th>
+
+                    <th><?php echo $propiedad->id; ?></th> <!-- Proceso e imprimo -->
+                    <th><?php echo $propiedad->titulo; ?></th>
+                    <th> <img src="/imagenes/<?php echo $propiedad->imagen; ?>" class="imagen-tabla"> </th>
+                    <th>$ <?php echo $propiedad->precio; ?></th>
                     <th>
                         <form method="POST" class="w-100">
 
-                            <input type="hidden" name="eliminarId" value="<?php echo $propiedad['id']; ?>">
+                            <input type="hidden" name="eliminarId" value="<?php echo $propiedad->id; ?>">
 
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad['id'] ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
                     </th>
                 </tr>
-            <?php endwhile ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 </main>
