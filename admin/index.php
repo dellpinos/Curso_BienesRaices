@@ -12,33 +12,24 @@ $propiedades = Propiedad::all();
 // Muestra mensaje condicional
 $resultado = $_GET['resultado'] ?? null; // cargo datos de la URL
 
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['eliminarId'];
     $id = filter_var($id, FILTER_VALIDATE_INT); // valida que no sea manipulado
 
     if($id) {
 
-        // Eliminar la imagen
-        $query = "SELECT imagen FROM propiedades WHERE id = {$id}";
-        $resultado = mysqli_query($db, $query);
-        $propiedad = mysqli_fetch_assoc($resultado);
 
-        unlink('../imagenes/' . $propiedad['imagen']);
+        $propiedad = Propiedad::find($id);
 
-        // Eliminar el registro
-        $query = "DELETE FROM propiedades WHERE id = {$id}";
-        $resultado = mysqli_query($db, $query);
+        $propiedad->eliminar();
 
-        if($resultado) {
-            header('Location: /admin?resultado=3');
-        }
+
+
+
+
+
     }
 }
-
-
-
 
 //Incluye template
 
@@ -87,7 +78,7 @@ incluirTemplate('header');
 
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
-                        <a href="admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="/admin/propiedades/actualizar.php?id=<?php echo $propiedad->id ?>" class="boton-amarillo-block">Actualizar</a>
                     </th>
                 </tr>
             <?php endforeach; ?>

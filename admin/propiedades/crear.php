@@ -25,7 +25,7 @@ $errores = Propiedad::getErrores();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     /** Crea una nueva instancia  */
-    $propiedad = new Propiedad($_POST); // almaceno el POST en memoria
+    $propiedad = new Propiedad($_POST['propiedad']); // almaceno el POST en memoria, utilizo la llave del array que utilizo para sincronizar
 
 
     /** SUBIDA DE ARCHIVOS */
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
     // Setear la imagen
-    if ($_FILES['imagen']['tmp_name']) {
-        $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600); // Realiza un resize a la imagen con intervention
+    if($_FILES['propiedad']['tmp_name']['imagen']) {
+        $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600); // Realiza un resize a la imagen con intervention
         $propiedad->setImagen($nombreImagen);
     }
 
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $image->save(CARPETA_IMAGENES . $nombreImagen);
 
         //Guarda en la base de datos
-        $resultado = $propiedad->guardar(); //almacena o no y devuelve un bool 
+        $propiedad->guardar(); //almacena o no y devuelve un bool 
 
         // Mensaje de exito y error
         if ($resultado) {
