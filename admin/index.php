@@ -5,9 +5,13 @@ require '../includes/app.php';
 usuarioAutenticado();
 
 use App\Propiedad;
+use App\Vendedor;
 
 // Implementar un metodo para obtener todas las Casas utilizando Active Record
 $propiedades = Propiedad::all();
+$vendedor = Vendedor::all();
+
+
 
 // Muestra mensaje condicional
 $resultado = $_GET['resultado'] ?? null; // cargo datos de la URL
@@ -17,16 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = filter_var($id, FILTER_VALIDATE_INT); // valida que no sea manipulado
 
     if($id) {
-
-
         $propiedad = Propiedad::find($id);
 
         $propiedad->eliminar();
-
-
-
-
-
 
     }
 }

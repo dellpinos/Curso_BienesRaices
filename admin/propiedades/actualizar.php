@@ -1,6 +1,7 @@
 <?php
 
 use App\Propiedad;
+use App\Vendedor;
 use Intervention\Image\ImageManagerStatic as Image;
 
 require '../../includes/app.php';
@@ -13,13 +14,11 @@ $id = filter_var($id, FILTER_VALIDATE_INT);
 if (!$id) {
     header('Location: /admin');
 }
-
+// Obtener los datos de la propiedad
 $propiedad = Propiedad::find($id);
 
-// Consultar DB para obtener vendedores
-
-$consulta = "SELECT * FROM vendedores";
-$resultado = mysqli_query($db, $consulta);
+// Consulta para obtener todos los vendedores
+$vendedores = Vendedor::all();
 
 // Array con mensajes de error
 $errores = Propiedad::getErrores();
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errores)) {
 
-        if ($_FILES['propiedad']['tmp_name']['imagen']) { // <<<<<<< agrego este IF por el undefined
+        if ($_FILES['propiedad']['tmp_name']['imagen']) {
         $image->save(CARPETA_IMAGENES . $nombreImagen);
     }
         /**  Insertar en la base de datos */
