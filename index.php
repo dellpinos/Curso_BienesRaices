@@ -31,11 +31,11 @@ incluirTemplate('header', $inicio = true);
 <section class="seccion contenedor">
     <h2 class="m-top-bottom" >Casas y Departamentos en Venta</h2>
 
+<!-- Include cards -->    
     <?php  
-        $limite = 3; // cantidad de cards en pantalla
+
         include 'includes/templates/anuncios.php'
     ?>
-
 
 
     <div class="alinear-derecha">

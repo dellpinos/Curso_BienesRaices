@@ -131,6 +131,7 @@ class ActiveRecord
     {
         return static::$errores;
     }
+    
     public function validaciones()
     {
         static::$errores = []; // Vacia el array de errores cada vez que se llama el metodo
@@ -148,6 +149,18 @@ class ActiveRecord
 
         return $resultado;
     }
+
+    // Obtiene determinado numero de registro
+    public static function get($cantidad)
+    {
+        $query = "SELECT * FROM " . static::$tabla . " LIMIT " . $cantidad;
+
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+    }
+
+
 
     // Busca un registro por su id
     public static function find($id)

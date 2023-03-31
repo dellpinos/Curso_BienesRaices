@@ -8,9 +8,12 @@
         <h2>Casas y Departamentos en venta</h2>
 
         <?php
+
             $limite = 20;
             include 'includes/templates/anuncios.php'
+            
         ?>
+
     </main>
 
     <?php 

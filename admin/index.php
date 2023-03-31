@@ -1,9 +1,9 @@
 <?php
-// Inicio sesion
 
 require '../includes/app.php';
+// Inicio sesion
 usuarioAutenticado();
-
+// Importar Clases
 use App\Propiedad;
 use App\Vendedor;
 
@@ -17,6 +17,7 @@ $resultado = $_GET['resultado'] ?? null; // cargo datos de la URL
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+    // Validar id
     $id = $_POST['eliminarId'];
     $id = filter_var($id, FILTER_VALIDATE_INT); // valida que no sea manipulado
 
@@ -43,21 +44,16 @@ incluirTemplate('header');
 <main class="contenedor seccion">
     <h1>Menú Administrador</h1>
 
-    <?php if (intval($resultado) === 1) : ?> <!-- Evaluo si poner cartel de propiedad creada -->
-        <p class="alerta exito">Creado correctamente</p>
-    <?php elseif (intval($resultado) === 2) : ?>
-        <p class="alerta exito">Actualizado correctamente</p>
-    <?php elseif (intval($resultado) === 3) : ?>
-        <p class="alerta exito">Eliminado correctamente</p>
-    <?php endif ?>
-
+    <?php  
+        $mensaje = mostrarNotificacion(intval($resultado)); // convierto string a int
+        if($mensaje) : ?>
+            <p class="alerta exito"> <?php echo s($mensaje); ?> </p>
+    <?php endif; ?>
 
     <a href="/admin/propiedades/crear.php" class="boton boton-verde">Nueva propiedad</a>
     <a href="/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo vendedor</a>
 
     <h2>Propiedades</h2>
-
-
     <table class="propiedades">
         <thead>
             <tr> <!-- cabecera de la lista/ columnas de la DB -->

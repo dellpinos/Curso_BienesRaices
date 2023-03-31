@@ -42,3 +42,25 @@ function validarTipoContenido($tipo){
     return in_array($tipo, $tipos);  // busca un string o un valor dentro de un array, toma dos valores 1_lo que busca y 2_donde buscarlo
 }
 
+// Mostrar los mensajes
+function mostrarNotificacion($codigo){
+    
+    $mensaje = '';
+
+    switch($codigo) {
+        case 1 :
+            $mensaje = 'Creado correctamente';
+        break;
+        case 2 :
+            $mensaje = 'Actualizado correctamente';
+        break;
+        case 3 :
+            $mensaje = 'Eliminado correctamente';
+        break;
+        default:
+        $mensaje = false;
+        break;
+    }
+    return $mensaje;
+
+}
