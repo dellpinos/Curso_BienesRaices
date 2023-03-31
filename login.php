@@ -78,7 +78,7 @@ incluirTemplate('header');
             <label for="email">E-mail</label>
             <input type="email" placeholder="Ingresa tu e-mail" id="email" name="email" required>
 
-            <label for="telefono">Password</label>
+            <label for="password">Password</label>
             <input type="password" placeholder="Ingresa tu Password" id="Password" name="password" required>
 
         </fieldset>

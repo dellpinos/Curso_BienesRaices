@@ -34,5 +34,27 @@
             color: $blanco;
         }
     }
+
+    /* BOTONES */
+
+    // .boton-negro {
+        
+    //     @include boton($negro, inline-block);
+    // }
+    // .boton-negro-block {
+    //     @include boton($negro, block);
+    // }
+    
+    // .boton-gris {
+    //     @include boton($gris, inline-block);
+    // }
+    // .boton-gris-block {
+    //     @include boton($gris, block);
+    //     padding: 1.5rem;
+    //     width: 100%;
+    // }
+    // .boton-blanco-block {
+    //     @include boton($blanco, block);
+    // }
     
 }

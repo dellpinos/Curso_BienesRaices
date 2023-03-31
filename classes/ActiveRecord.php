@@ -2,7 +2,8 @@
 
 namespace App;
 
-class ActiveRecord {
+class ActiveRecord
+{
     // sintaxis anterior
 
     //DB
@@ -127,7 +128,7 @@ class ActiveRecord {
 
     // Este método evita el undefined antes de que haya un POST
     public static function getErrores()
-    {   
+    {
         return static::$errores;
     }
     public function validaciones()

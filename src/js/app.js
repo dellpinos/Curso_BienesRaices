@@ -4,10 +4,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     darkMode();
 
+    
+
 });
 
 
 function darkMode() {
+
+    // botonesDM(); //// <<<<<< Agregado
 
     const prefiereDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -44,3 +48,40 @@ function navegacionResponsive() {
 
     navegacion.classList.toggle('mostrar');
 }
+
+
+/** AGREGANDO COSAS */
+
+// Botones en otro color en el Dark Mode
+
+// function botonesDM(){
+
+//     console.log('Desde Botones 00');
+//     const botonesAmaCambiar = document.querySelectorAll('.boton-amarillo');
+//     const botonesAmaCambiarB = document.querySelectorAll('.boton-amarillo-block');
+//     const botonesRojCambiarB = document.querySelectorAll('.boton-rojo-block');
+//     const botonesRojCambiar = document.querySelectorAll('.boton-rojo');
+
+
+//     botonesAmaCambiar.forEach(e => {
+//         console.log('Desde Botones 01');
+//         e.classList.toggle('boton-gris');
+//         e.classList.toggle('boton-amarillo');
+//     });
+//     botonesAmaCambiarB.forEach(e => {
+//         console.log('Desde Botones 02');
+//         e.classList.toggle('boton-gris-block');
+//         e.classList.toggle('boton-amarillo-block');
+//     });
+//     botonesRojCambiar.forEach(e => {
+//         console.log('Desde Botones 01');
+//         e.classList.toggle('boton-negro');
+//         e.classList.toggle('boton-rojo');
+//     });
+//     botonesRojCambiarB.forEach(e => {
+//         console.log('Desde Botones 02');
+//         e.classList.toggle('boton-negro-block');
+//         e.classList.toggle('boton-rojo-block');
+//     });
+
+// }

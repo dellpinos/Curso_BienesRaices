@@ -13,3 +13,6 @@ imagenes
 #Librerias NPM
 node_modules
 /vendor/
+
+#Pendientes por hacer
+pendientes.md
