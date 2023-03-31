@@ -38,9 +38,7 @@ class Vendedor extends ActiveRecord {
         if (!$this->email) {
             self::$errores[] = "Tenes que poner un email";
         }
-
-
-        if(!preg_match('/[0-9]{10}/', $this->telefono)) {
+        if(!preg_match('/[0-9]{8}/', $this->telefono)) { // caracteres del 0 al 9 y con una extension de 8
             self::$errores[] = "Formato no valido";
         }
 
